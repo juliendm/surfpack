@@ -1,0 +1,19 @@
+Load[name = sat_scores, file = 'sat_scores.spd', n_predictors = 6, 
+  n_responses = 1]
+CreateSurface[name = sat_poly1, data = sat_scores, type = polynomial, order = 1]
+CreateSurface[name = sat_poly2, data = sat_scores, type = polynomial, order = 2]
+CreateSurface[name = sat_kriging, data = sat_scores, type = kriging]
+#CreateSurface[name = sat_mars, data = sat_scores, type = mars]
+CreateSurface[name = sat_ann, data = sat_scores, type = ann]
+
+#Save[surface = sat_poly1, file = 'sat_poly1.sps']
+#Save[surface = sat_poly2, file = 'sat_poly2.sps']
+#Save[surface = sat_kriging, file = 'sat_kriging.sps']
+#Save[surface = sat_mars, file = 'sat_mars.sps']
+#Save[surface = sat_ann, file = 'sat_ann.sps']
+
+Fitness[surface = sat_poly1, data = sat_scores, metric = press]
+Fitness[surface = sat_poly2, data = sat_scores, metric = press]
+Fitness[surface = sat_kriging, data = sat_scores, metric = press]
+#Fitness[surface = sat_mars, data = sat_scores, metric = press]
+Fitness[surface = sat_ann, data = sat_scores, metric = press]

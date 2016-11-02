@@ -1,0 +1,2 @@
+Load[name = timing_data, file = 'krigtimes_50to3000.txt', n_predictors = 1,
+	n_responses = 2]

@@ -1,0 +1,36 @@
+Load[name = ccd, file = 'ccd_lhs_4d_42p.spd', n_predictors = 4, n_responses = 1]
+CreateAxes[name = ax4d, bounds = '0.5 1.5 | 1.5 4.5 | 0.7 1.0 | 0.7']
+CreateSample[name = test_data, axes = ax4d, grid_points = (11,11,11,1)]
+
+# First-order polynomial
+CreateSurface[name = poly1, data = ccd, type = polynomial, order =1]
+Save[surface = poly1, file = 'poly1.sps']
+Evaluate[surface = poly1, data = test_data, label = poly1]
+
+# MARS
+CreateSurface[name = mars, data = ccd, type = mars]
+Save[surface = mars, file = 'mars.bsps']
+Evaluate[surface = mars, data = test_data, label = mars]
+
+# RBF
+CreateSurface[name = rbf, data = ccd, type = rbf]
+Save[surface = rbf, file = 'rbf.sps']
+Evaluate[surface = rbf, data = test_data, label = rbf]
+
+# ANN
+CreateSurface[name = ann, data = ccd, type = ann]
+Save[surface = ann, file = 'ann.sps']
+Evaluate[surface = ann, data = test_data, label = ann]
+
+# MLS
+CreateSurface[name = mls, data = ccd, type = mls]
+Save[surface = mls, file = 'mls.bsps']
+Evaluate[surface = mls, data = test_data, label = mls]
+
+# Kriging
+CreateSurface[name = kriging, data = ccd, type = kriging]
+Save[surface = kriging, file = 'kriging.sps']
+Evaluate[surface = kriging, data = test_data, label = kriging]
+
+Save[data = test_data, file = 'test_data_save.spd']
+

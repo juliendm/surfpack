@@ -1,0 +1,9 @@
+# externals.all: surfpack external packages
+#  - File to track revisions of all externals not included in
+#    checkout by default.
+#  - Update this to reflect correct external paths and revs when 
+#    branching/tagging a release
+#  - Use Subversion 1.5 externals format
+#
+-rHEAD	https://software.sandia.gov/svn/public/tpl/conmin/tags/1.0	CONMIN
+-rHEAD	https://software.sandia.gov/svn/public/tpl/NCSUOpt/trunk	NCSUOpt

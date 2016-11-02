@@ -1,0 +1,9 @@
+Load[name = timing_data, file = 'krigtimes_50to3000.spd', n_predictors = 1,
+  n_responses = 2]
+CreateSurface[name = timing_poly2, data = timing_data, type = polynomial,
+  order = 2]
+CreateAxes[name = test_axes, bounds = '50 5050']
+CreateSample[name = test_timing_data, axes = test_axes, grid_points = (51)]
+Evaluate[surface = timing_poly2, data = test_timing_data]
+Save[surface = timing_poly2, file = 'timing_poly2.sps']
+Save[data = test_timing_data, file = 'test_timing_data.spd']

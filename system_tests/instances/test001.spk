@@ -1,0 +1,44 @@
+# Load data from files
+!echo starting
+Load[name = zonk_1d_47p, file = '../perm_data/zonk_1d_47p.spd',
+  n_predictors = 1, n_responses = 1]
+Load[name = zonk_1d_24p, file = '../perm_data/zonk_1d_24p.spd',
+  n_predictors = 1, n_responses = 1]
+
+# Load AxesBounds from files 
+CreateAxes[name = zonk_axb, bounds = '100 2400']
+
+# Generate data from CreateAxes using test functions
+CreateSample[name = zonk_eval, axes = zonk_axb, grid_points = (250)]
+
+# Load surfaces from files
+
+# Create surfaces using existing data sets
+CreateSurface[name = mars_zonk, data = zonk_1d_24p, 
+	      type = mars]
+
+# Evaluate surfaces 
+Evaluate[surface = mars_zonk, data = zonk_eval]
+Evaluate[surface = mars_zonk, data = zonk_1d_47p]
+
+# Compute surface fitness metrics
+Fitness[surface = mars_zonk, data = zonk_1d_24p, metric = mean_abs]
+Fitness[surface = mars_zonk, data = zonk_1d_47p, metric = mean_abs]
+
+# Save data to file
+Save[data = zonk_eval, file = '../tmp_data/zonk_eval.spd']
+Save[data = zonk_1d_47p, file = '../tmp_data/zonk_test_47p.spd']
+
+# Save surfaces to file
+# These commands write and execute a gnuplot script that generates a plot
+# showing the actual and predicted data values
+!echo done
+/*
+echo "set term png; set output \"zonkplot.png\"" > gpzonk
+echo "plot [100:2400] \"../tmp_data/zonk_eval.spd\" using 1:2, \"../perm_data/zonk_1d_47p.spd\" using 1:2, \"../perm_data/zonk_1d_24p.spd\" using 1:2, \"../tmp_data/zonk_test_47p.spd\" using 1:2" >> gpzonk
+gnuplot gpzonk
+rm gpzonk
+*/
+#Type 'display zonkplot.png' to see plot
+
+

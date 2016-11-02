@@ -1,0 +1,68 @@
+------------------------------------------------------------------------------
+
+Surfpack:
+A Library of Multidimensional Surface Fitting Methods 
+
+------------------------------------------------------------------------------
+
+Anthony A. Giunta
+Mark Richards
+Eric Cyr
+Shannon L. Brown
+Laura P. Swiler
+Michael S. Eldred
+Keith R. Dalbey
+Brian M. Adams
+
+Contact:
+Brian M. Adams
+Sandia National Laboratories
+P.O. Box 5800, Mail Stop 1318
+Albuquerque, NM 87185-1318
+Email: surfpack-developers@development.sandia.gov
+Web: http://dakota.sandia.gov/packages/surfpack
+
+------------------------------------------------------------------------------
+License:
+
+Surfpack is distributed under the GNU Lesser General Public
+License. It is free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation; either version 2.1 of the License, or
+(at your option) any later version.  A copy of this license is
+included in the GNU_LICENSE_INFO file, and is also available online
+from http://www.gnu.org/licenses/lgpl.html.  Also refer to the
+COPYRIGHT file for important U.S. Government legal notices.
+
+The Surfpack distribution contains libraries which are available separately
+under compatible licensing terms.  In particular, many of the libraries in src
+are available separately under either the GNU Lesser General Public License
+(LGPL).
+
+------------------------------------------------------------------------------
+Overview:
+
+The Surfpack library provides a collection of surface fitting methods and
+quality-of-fit metrics that can be used to quantify the error in the resulting
+approximations.  Currently supported data-fitting algorithms include
+least-squares linear regression, multivariate adaptive regression splines
+(MARS), Kriging interpolation, artificial neural networks, and radial basis
+function networks.  These algorithms are available both as a C++ library and as
+a standalone program with a simple shell interface.
+
+------------------------------------------------------------------------------
+
+Surfpack References:
+
+General Information on Surfpack
+Web: http://dakota.sandia.gov/packages/surfpack
+Surfpack User's Manual (available on the website)
+
+
+Technical Documents:
+
+Giunta, A. A., Swiler, L. P., Brown, S. L., Eldred, M. S., Richards, M. D., 
+and Cyr, E. C., "The Surfpack Software Library for Surrogate Modeling of 
+Sparse Irregularly Spaced Multidimensional Data," (to appear) 11th AIAA/ISSMO
+Multidisciplinary Analysis and Optimization Conference, AIAA Paper 2006-7049,
+Portsmouth, VA, 2006.

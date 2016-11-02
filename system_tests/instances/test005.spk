@@ -1,0 +1,21 @@
+# Load CreateAxes from files 
+CreateAxes[name = ax1, bounds = '-1e10 1e10']
+
+# Generate data from CreateAxes using test functions
+CreateSample[name = grid, axes = ax1, test_functions = (rastrigin, sphere),
+  grid_points = (10)]
+CreateSample[name = mc, axes = ax1, test_functions = (sumofall, sphere), 
+  size = 10]
+
+# Create surfaces using existing data sets
+CreateSurface[name = mars_grid, data = grid, type = mars,
+		response_index = 1]
+CreateSurface[name = mars_mc, data = mc, type = mars,
+		response_index = 1]
+
+# Compute surface fitness metrics
+Fitness[surface = mars_grid, metric = max_abs]
+Fitness[surface = mars_mc, metric = max_abs]
+
+
+

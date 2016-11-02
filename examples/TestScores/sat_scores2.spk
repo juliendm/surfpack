@@ -1,0 +1,4 @@
+Load[name = what_ifs, file = 'what_ifs.spd', n_predictors = 6, n_responses = 0]
+Load[name = sat_mars, file = 'sat_mars.sps']
+Evaluate[surface = sat_mars, data = what_ifs, label = SAT_est]
+Save[data = what_ifs, file = 'what_ifs_estimates.spd']

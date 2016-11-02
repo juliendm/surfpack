@@ -1,0 +1,14 @@
+* To create a PDF file of the Surfpack User's Manual, use the 
+following commands:
+
+  pdflatex surfpack_users_manual.tex
+  bibtex surfpack_users_manual
+  pdflatex surfpack_users_manual.tex
+  pdflatex surfpack_users_manual.tex
+
+Note, if you just use 'latex' instead of 'pdflatex', the
+graphics files will not get incorporated into the PDF file.
+
+* To build the Doxygen (Surfpack Developer) docs:
+
+  doxygen DoxygenConfig

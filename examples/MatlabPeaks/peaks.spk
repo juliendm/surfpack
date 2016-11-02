@@ -1,0 +1,54 @@
+# Read in data
+Load[name = peaks_data, file = 'matlab_peaks.spd', n_predictors = 2,
+  n_responses = 1]
+
+# Create a test set with 27 points, evenly spaced .2 apart
+CreateAxes[name = ax_2d, bounds = '-3 3 | -3 3 ']
+CreateSample[name = test_data, axes = ax_2d, grid_points = (13,13), 
+  labels = (x1,x2)]
+
+CreateSurface[name = poly1_peaks, data = peaks_data, type = polynomial, order = 1]
+CreateSurface[name = poly2_peaks, data = peaks_data, type = polynomial, order = 2]
+CreateSurface[name = poly3_peaks, data = peaks_data, type = polynomial, order = 3]
+CreateSurface[name = kriging_peaks_global_corr, data = peaks_data, type = kriging, lower_bounds = (-3.0, -3.0), upper_bounds = (3.0, 3.0), optimization_method = global ]
+CreateSurface[name = kriging_peaks_local_corr, data = peaks_data, type = kriging, lower_bounds = (-3.0, -3.0), upper_bounds = (3.0, 3.0), optimization_method = local ]
+CreateSurface[name = kriging_peaks_multi_local_corr, data = peaks_data, type = kriging, lower_bounds = (-3.0, -3.0), upper_bounds = (3.0, 3.0), optimization_method = local, num_starts = 17 ]
+CreateSurface[name = kriging_peaks_sampling_corr, data = peaks_data, type = kriging, lower_bounds = (-3.0, -3.0), upper_bounds = (3.0, 3.0), optimization_method = sampling, max_trials = 17 ]
+CreateSurface[name = kriging_peaks_user_corr, data = peaks_data, type = kriging,
+  correlation_lengths = (0.335428, 2.68286), optimization_method = none] #these lengths are the ones found using global optimization with all 20 points, a linear trend, and -3.0 <= xr <= 3.0
+CreateSurface[name = ann_peaks, data = peaks_data, type = ann]
+
+Evaluate[surface = poly1_peaks, data = test_data, label = poly1]
+Evaluate[surface = poly2_peaks, data = test_data, label = poly2]
+Evaluate[surface = poly3_peaks, data = test_data, label = poly3]
+Evaluate[surface = kriging_peaks_global_corr, data = test_data, label = kriging_global]
+Evaluate[surface = kriging_peaks_local_corr, data = test_data, label = kriging_local]
+Evaluate[surface = kriging_peaks_multi_local_corr, data = test_data, label = kriging_multi_local]
+Evaluate[surface = kriging_peaks_sampling_corr, data = test_data, label = kriging_sampling]
+Evaluate[surface = kriging_peaks_user_corr, data = test_data, label = krig_usr]
+Evaluate[surface = ann_peaks, data = test_data, label = ann]
+Save[data = test_data, file = 'test_data.spd']
+
+Fitness[surface = poly1_peaks, data = peaks_data, metric = press]
+Fitness[surface = poly2_peaks, data = peaks_data, metric = press]
+Fitness[surface = poly3_peaks, data = peaks_data, metric = press]
+Fitness[surface = kriging_peaks_global_corr, data = peaks_data, metric = press]
+Fitness[surface = kriging_peaks_local_corr, data = peaks_data, metric = press]
+Fitness[surface = kriging_peaks_multi_local_corr, data = peaks_data, metric = press]
+Fitness[surface = kriging_peaks_sampling_corr, data = peaks_data, metric = press]
+Fitness[surface = kriging_peaks_user_corr, data = peaks_data, metric = press]
+Fitness[surface = ann_peaks, data = peaks_data, metric = press]
+
+Fitness[surface = poly1_peaks, data = peaks_data, metric = root_mean_squared]
+Fitness[surface = poly2_peaks, data = peaks_data, metric = root_mean_squared]
+Fitness[surface = poly3_peaks, data = peaks_data, metric = root_mean_squared]
+Fitness[surface = kriging_peaks_global_corr, data = peaks_data, metric = root_mean_squared]
+Fitness[surface = kriging_peaks_local_corr, data = peaks_data, metric = root_mean_squared]
+Fitness[surface = kriging_peaks_multi_local_corr, data = peaks_data, metric = root_mean_squared]
+Fitness[surface = kriging_peaks_sampling_corr, data = peaks_data, metric = root_mean_squared]
+Fitness[surface = kriging_peaks_user_corr, data = peaks_data, metric = root_mean_squared]
+Fitness[surface = ann_peaks, data = peaks_data, metric = root_mean_squared]
+
+Fitness[surface = poly1_peaks, data = peaks_data, metric = rsquared]
+Fitness[surface = poly2_peaks, data = peaks_data, metric = rsquared]
+Fitness[surface = poly3_peaks, data = peaks_data, metric = rsquared]

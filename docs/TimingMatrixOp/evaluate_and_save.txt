@@ -1,0 +1,5 @@
+CreateAxes[name = test_axes, bounds = '50 5000']
+CreateSample[name = test_timing_data, axes = test_axes, grid_points = (50)]
+Evaluate[surface = timing_poly2, data = test_timing_data]
+Save[surface = timing_poly2, file = 'timing_poly2.sps']
+Save[data = test_timing_data, file = 'test_timing_data.spd']

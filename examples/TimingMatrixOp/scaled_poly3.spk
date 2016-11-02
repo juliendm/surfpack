@@ -1,0 +1,7 @@
+CreateSurface[name = poly3, data = timing_data, type = polynomial,
+              order = 3, norm_scale = ('num_pts')]
+
+mean_abs for poly3: 0.10484
+press for poly3: 0.197664
+rsquared for poly3: 0.999956
+

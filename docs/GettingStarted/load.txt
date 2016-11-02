@@ -1,0 +1,1 @@
+Load[name = world_pop, file = 'world_pop.spd', n_predictors= 1, n_responses = 7]

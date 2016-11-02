@@ -1,0 +1,24 @@
+# Comparing linear and quadratic regression fits for NBA salary cap data over a
+# 22 year period, 1984-2006.  Data obtained from ESPN.com (also available from 
+# Wikipedia page for "NBA Salary Cap").
+Load[name = slry_data, file = 'salaries.spd', n_predictors = 2, n_responses = 1]
+CreateSurface[name = slry_poly1, data = slry_data, type = polynomial, order = 1]
+CreateSurface[name = slry_poly2, data = slry_data, type = polynomial, order = 2]
+
+Fitness[surface = slry_poly1, data = slry_data, metric = press]
+Fitness[surface = slry_poly2, data = slry_data, metric = press]
+
+Fitness[surface = slry_poly1, data = slry_data, metric = root_mean_squared]
+Fitness[surface = slry_poly2, data = slry_data, metric = root_mean_squared]
+
+Fitness[surface = slry_poly1, data = slry_data, metric = cv, n = 3]
+Fitness[surface = slry_poly2, data = slry_data, metric = cv, n = 3]
+
+Fitness[surface = slry_poly1, data = slry_data, metric = mean_squared]
+Fitness[surface = slry_poly2, data = slry_data, metric = mean_squared]
+
+Fitness[surface = slry_poly1, data = slry_data, metric = max_abs]
+Fitness[surface = slry_poly2, data = slry_data, metric = max_abs]
+
+Fitness[surface = slry_poly1, data = slry_data, metric = mean_scaled]
+Fitness[surface = slry_poly2, data = slry_data, metric = mean_scaled]

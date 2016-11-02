@@ -1,0 +1,47 @@
+# Read in data
+Load[name = cfd, file = 'cfd.spd', n_predictors = 1,
+  n_responses = 1]
+
+# Create a test set with 27 points, evenly spaced .2 apart
+CreateAxes[name = ax_1d, bounds = '-4 1.2 ']
+CreateSample[name = test_data, axes = ax_1d, grid_points = (27), 
+  labels = (x)]
+
+CreateSurface[name = poly1_cfd, data = cfd, type = polynomial, order = 1]
+CreateSurface[name = poly2_cfd, data = cfd, type = polynomial, order = 2]
+CreateSurface[name = poly3_cfd, data = cfd, type = polynomial, order = 3]
+CreateSurface[name = mars_cfd, data = cfd, type = mars]
+CreateSurface[name = kriging_cfd, data = cfd, type = kriging]
+CreateSurface[name = kriging_cfd_user_corr, data = cfd, type = kriging,
+  correlations = (1.0)]
+CreateSurface[name = ann_cfd, data = cfd, type = ann]
+
+Evaluate[surface = poly1_cfd, data = test_data, label = poly1]
+Evaluate[surface = poly2_cfd, data = test_data, label = poly2]
+Evaluate[surface = poly3_cfd, data = test_data, label = poly3]
+Evaluate[surface = mars_cfd, data = test_data, label = mars]
+Evaluate[surface = kriging_cfd, data = test_data, label = kriging]
+Evaluate[surface = kriging_cfd_user_corr, data = test_data, label = krig_usr]
+Evaluate[surface = ann_cfd, data = test_data, label = ann]
+Save[data = test_data, file = 'test_data.spd']
+
+Fitness[surface = poly1_cfd, data = cfd, metric = press]
+Fitness[surface = poly2_cfd, data = cfd, metric = press]
+Fitness[surface = poly3_cfd, data = cfd, metric = press]
+Fitness[surface = mars_cfd, data = cfd, metric = press]
+Fitness[surface = kriging_cfd, data = cfd, metric = press]
+Fitness[surface = kriging_cfd_user_corr, data = cfd, metric = press]
+Fitness[surface = ann_cfd, data = cfd, metric = press]
+
+Fitness[surface = poly1_cfd, data = cfd, metric = root_mean_squared]
+Fitness[surface = poly2_cfd, data = cfd, metric = root_mean_squared]
+Fitness[surface = poly3_cfd, data = cfd, metric = root_mean_squared]
+Fitness[surface = mars_cfd, data = cfd, metric = root_mean_squared]
+Fitness[surface = kriging_cfd, data = cfd, metric = root_mean_squared]
+Fitness[surface = kriging_cfd_user_corr, data = cfd, metric = root_mean_squared]
+Fitness[surface = ann_cfd, data = cfd, metric = root_mean_squared]
+
+Fitness[surface = poly1_cfd, data = cfd, metric = rsquared]
+Fitness[surface = poly2_cfd, data = cfd, metric = rsquared]
+Fitness[surface = poly3_cfd, data = cfd, metric = rsquared]
+

@@ -1,0 +1,32 @@
+Load[name = ccd, file = 'ccd_lhs_4d_42p.spd', n_predictors = 4,
+ n_responses = 1]
+CreateAxes[name = ax4d, bounds = '0.5 1.5 | 1.5 4.5 | 0.7 1.0 | 0.7']
+CreateSample[name = test_data, axes = ax4d, grid_points = (11,11,11,1)]
+CreateSurface[name = ccd_poly1, data = ccd, type = polynomial, order =1]
+CreateSurface[name = ccd_poly2, data = ccd, type = polynomial, order =2]
+CreateSurface[name = ccd_poly3, data = ccd, type = polynomial, order =3]
+CreateSurface[name = ccd_kriging, data = ccd, type = kriging]
+CreateSurface[name = ccd_ann, data = ccd, type = ann]
+
+Evaluate[surface = ccd_poly1, data = test_data, label = poly1]
+Evaluate[surface = ccd_poly2, data = test_data, label = poly2]
+Evaluate[surface = ccd_poly3, data = test_data, label = poly3]
+Evaluate[surface = ccd_kriging, data = test_data, label = kriging]
+Evaluate[surface = ccd_ann, data = test_data, label = ann]
+Save[data = test_data, file = 'test_data.spd']
+
+Fitness[surface = ccd_poly1, data = ccd, metric = rsquared]
+Fitness[surface = ccd_poly2, data = ccd, metric = rsquared]
+Fitness[surface = ccd_poly3, data = ccd, metric = rsquared]
+
+Fitness[surface = ccd_poly1, data = ccd, metric = root_mean_squared]
+Fitness[surface = ccd_poly2, data = ccd, metric = root_mean_squared]
+Fitness[surface = ccd_poly3, data = ccd, metric = root_mean_squared]
+Fitness[surface = ccd_kriging, data = ccd, metric = root_mean_squared]
+Fitness[surface = ccd_ann, data = ccd, metric = root_mean_squared]
+
+Fitness[surface = ccd_poly1, data = ccd, metric = press]
+Fitness[surface = ccd_poly2, data = ccd, metric = press]
+Fitness[surface = ccd_poly3, data = ccd, metric = press]
+Fitness[surface = ccd_kriging, data = ccd, metric = press]
+Fitness[surface = ccd_ann, data = ccd, metric = press]

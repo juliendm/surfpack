@@ -1,0 +1,64 @@
+
+# Load CreateAxes from files 
+CreateAxes[name = gen2d, file = '../axes/generic_2d.axb']
+
+# Generate data from CreateAxes using test functions
+CreateSample[test_functions = (sphere, quasisine, sumofall, noise),
+   name = mc_multi, axes = gen2d, size = 200]
+
+# Save data to file
+Save[data = mc_multi, file = '../tmp_data/test018.spd']
+
+# Load data from files
+Load[name = seventeen_1d, file = '../perm_data/seventeen_1d.spd']
+Load[name = mc_multi, file = '../tmp_data/test018.bspd']
+
+# Load surfaces from files
+
+# Create surfaces using existing data sets
+CreateSurface[name = poly0_17, data = seventeen_1d, 
+	      type = polynomial, order = 0]
+CreateSurface[name = poly1_17, data = seventeen_1d, 
+	      type = polynomial, order = 1]
+CreateSurface[name = poly2_17, data = seventeen_1d, 
+	      type = polynomial, order = 2]
+CreateSurface[name = poly3_17, data = seventeen_1d, 
+	      type = polynomial, order = 3]
+CreateSurface[name = mars_17, data = seventeen_1d, 
+	      type = mars]
+CreateSurface[name = kriging_17, data = seventeen_1d, 
+	      type = kriging]
+CreateSurface[name = ann_17, data = seventeen_1d, 
+	      type = ann]
+CreateSurface[name = kriging_17, data = seventeen_1d, 
+	      type = kriging, thetas = (10.0)]
+CreateSurface[name = ann_17, data = seventeen_1d, 
+	      type = ann, fraction_withheld = .2]
+
+CreateSurface[name = poly0_noise, data = mc_multi, response_index = 3, 
+	      type = polynomial, order = 0]
+CreateSurface[name = poly1_noise, data = mc_multi, response_index = 3, 
+	      type = polynomial, order = 1]
+CreateSurface[name = poly2_noise, data = mc_multi, response_index = 3, 
+	      type = polynomial, order = 2]
+CreateSurface[name = poly3_noise, data = mc_multi, response_index = 3, 
+	      type = polynomial, order = 3]
+CreateSurface[name = mars_noise, data = mc_multi, response_index = 3, 
+	      type = mars]
+CreateSurface[name = kriging_noise, data = mc_multi, response_index = 3, 
+	      type = kriging]
+CreateSurface[name = ann_noise, data = mc_multi, response_index = 3, 
+	      type = ann]
+CreateSurface[name = kriging_noise, data = mc_multi, response_index = 3, 
+	      type = kriging, thetas = (10.0)]
+CreateSurface[name = ann_noise, data = mc_multi, response_index = 3, 
+	      type = ann, fraction_withheld = .2]
+# Evaluate surfaces 
+
+# Compute surface fitness metrics
+
+
+# Save surfaces to file
+
+
+

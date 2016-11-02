@@ -1,0 +1,89 @@
+# Load data from files
+Load[name = seventeen_1d, file = '../perm_data/seventeen_1d.spd']
+
+# Load CreateAxes from files 
+
+# Generate data from CreateAxes using test functions
+
+# Load surfaces from files
+
+# Create surfaces using existing data sets
+CreateSurface[name = poly0, data = seventeen_1d, type = polynomial, order = 0,
+  scaling = uniform]
+CreateSurface[name = poly1, data = seventeen_1d, type = polynomial, order = 1,
+  scaling = uniform]
+CreateSurface[name = poly2, data = seventeen_1d, type = polynomial, order = 2,
+  scaling = uniform]
+CreateSurface[name = poly3, data = seventeen_1d, type = polynomial, order = 3,
+  scaling = uniform]
+CreateSurface[name = poly4, data = seventeen_1d, type = polynomial, order = 4,
+  scaling = uniform]
+CreateSurface[name = poly5, data = seventeen_1d, type = polynomial, order = 5,
+  scaling = uniform]
+CreateSurface[name = poly6, data = seventeen_1d, type = polynomial, order = 6,
+  scaling = uniform]
+CreateSurface[name = poly7, data = seventeen_1d, type = polynomial, order = 7,
+  scaling = uniform]
+CreateSurface[name = poly8, data = seventeen_1d, type = polynomial, order = 8,
+  scaling = uniform]
+CreateSurface[name = poly9, data = seventeen_1d, type = polynomial, order = 9,
+  scaling = uniform]
+CreateSurface[name = poly10, data = seventeen_1d, type = polynomial, order=10,
+  scaling = uniform]
+CreateSurface[name = poly11, data = seventeen_1d, type = polynomial, order=11,
+  scaling = uniform]
+CreateSurface[name = poly12, data = seventeen_1d, type = polynomial, order=12,
+  scaling = uniform]
+CreateSurface[name = poly13, data = seventeen_1d, type = polynomial, order=13,
+  scaling = uniform]
+CreateSurface[name = poly14, data = seventeen_1d, type = polynomial, order=14,
+  scaling = uniform]
+CreateSurface[name = poly15, data = seventeen_1d, type = polynomial, order=15,
+  scaling = uniform]
+CreateSurface[name = poly16, data = seventeen_1d, type = polynomial, order=16,
+  scaling = uniform]
+
+# Evaluate surfaces 
+
+# Compute surface fitness metrics
+Fitness[surface = poly0, metric = max_abs]
+Fitness[surface = poly1, metric = max_abs]
+Fitness[surface = poly2, metric = max_abs]
+Fitness[surface = poly3, metric = max_abs]
+Fitness[surface = poly4, metric = max_abs]
+Fitness[surface = poly5, metric = max_abs]
+Fitness[surface = poly6, metric = max_abs]
+Fitness[surface = poly7, metric = max_abs]
+Fitness[surface = poly8, metric = max_abs]
+Fitness[surface = poly9, metric = max_abs]
+Fitness[surface = poly10, metric = max_abs]
+Fitness[surface = poly11, metric = max_abs]
+Fitness[surface = poly12, metric = max_abs]
+Fitness[surface = poly13, metric = max_abs]
+Fitness[surface = poly14, metric = max_abs]
+Fitness[surface = poly15, metric = max_abs]
+Fitness[surface = poly16, metric = max_abs]
+
+# Save data to file
+
+# Save surfaces to file
+Save[surface = poly0, file = '../tmp_surf/test003_poly0.sps']
+Save[surface = poly1, file = '../tmp_surf/test003_poly1.sps']
+Save[surface = poly2, file = '../tmp_surf/test003_poly2.sps']
+Save[surface = poly3, file = '../tmp_surf/test003_poly3.sps']
+Save[surface = poly4, file = '../tmp_surf/test003_poly4.sps']
+Save[surface = poly5, file = '../tmp_surf/test003_poly5.sps']
+Save[surface = poly6, file = '../tmp_surf/test003_poly6.sps']
+Save[surface = poly7, file = '../tmp_surf/test003_poly7.sps']
+Save[surface = poly8, file = '../tmp_surf/test003_poly8.sps']
+Save[surface = poly9, file = '../tmp_surf/test003_poly9.sps']
+Save[surface = poly10, file = '../tmp_surf/test003_poly10.sps']
+Save[surface = poly11, file = '../tmp_surf/test003_poly11.sps']
+Save[surface = poly12, file = '../tmp_surf/test003_poly12.sps']
+Save[surface = poly13, file = '../tmp_surf/test003_poly13.sps']
+Save[surface = poly14, file = '../tmp_surf/test003_poly14.sps']
+Save[surface = poly14, file = '../tmp_surf/test003_poly15.sps']
+Save[surface = poly16, file = '../tmp_surf/test003_poly16.sps']
+
+
+

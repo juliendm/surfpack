@@ -1,0 +1,6 @@
+Fitness[surface = poly2, metric = press]
+Fitness[surface = poly2, metric = rsquared]
+
+press for poly2: 1.87209
+rsquared for poly2: 0.996222
+

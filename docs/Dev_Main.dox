@@ -1,0 +1,102 @@
+namespace surfpack { // for some reason, this doesn't work with mainpage
+
+/** \mainpage Surfpack Developers Manual
+
+\author Brian M. Adams, Anthony A. Giunta, Mark D. Richards, Laura P. Swiler
+
+\version 1.1
+
+\htmlonly
+<b>Main Page Table of Contents</b>
+<ul>
+<li> <a href="index.html#DevIntro">Introduction</a> 
+<li> <a href="index.html#DevOverview">Surfpack Overview</a> 
+<li> <a href="index.html#DevStandAlone">Standalone Surfpack</a>
+<li> <a href="index.html#DevAddtnl">Additional Resources</a>
+</ul>
+\endhtmlonly
+
+
+\section DevIntro Introduction
+
+Surfpack is a collection of surface-fitting (response surface
+approximation, meta-modeling) methods and accompanying metrics to
+evaluate or predict the quality of the generated surfaces.  The
+concept of creating a global approximation or fit to a collection of
+data samples is utilized in many scientific disciplines, but the
+nomenclature varies widely from field to field.  The results from the
+application of such methods are commonly called empirical models,
+response surfaces, surrogate models, function approximations, or
+meta-models.  Many different algorithms have been developed to
+generalize from a set of data; these algorithms have different
+strengths and weaknesses.  The goals of Surfpack are to
+<ul>
+  <li> provide a C++ library of global multi-dimensional models to
+approximate experimental or model data;
+  <li> integrate with DAKOTA to accelerate optimization and
+uncertainty quantification through surrogate-based techniques; and
+  <li> (future) provide a standalone command-line tool for creating,
+evaluating, and saving surrogate models.
+</ul>
+
+This Developers Manual focuses on documentation of the class
+structures used by Surfpack.  It derives from annotated source code.
+For valid Surfpack commands, see \ref DevStandAlone, and for a general
+tour of DAKOTA features and capabilities, refer to the DAKOTA website
+http://dakota.sandia.gov/.
+
+\section DevOverview Surfpack Overview
+
+Surfpack uses a factory paradigm in which a \ref SurfpackModelFactory
+creates a factory for a given model type and general characteristics,
+like dimension.  A particular instance of a \ref SurfpackModelFactory
+can generate surrogate models (\ref SurfpackModel) of its type, given
+a particular \ref SurfData data set. Thus a single model factory may
+be used to generate many models corresponding to different data sets.
+Surfpack currently supports several model types with corresponding
+factories for instantiating them:
+
+<ul>
+  <li> \ref DirectANNModel (\ref DirectANNModelFactory): Artificial
+neural network
+  <li> \ref KrigingModel (\ref KrigingModelFactory): Fixed variance
+model Kriging
+  <li> \ref LinearRegressionModel (\ref LinearRegressionModelFactory):
+polynomial bases 
+  <li> \ref MarsModel (\ref MarsModelFactory): Multivariate Adaptive
+Regression Splines
+  <li> \ref MovingLeastSquaresModel (\ref
+MovingLeastSquaresModelFactory):
+  <li > \ref RadialBasisFunctionModel (\ref RadialBasisFunctionModelFactory):
+</ul> 
+
+Each model and its corresponding factory is implemented in a single
+header/source file pair.  When interfacing to Surfpack through its C++
+API, one would typically instantiate a Surfpack model factory, use it
+to create a \ref SurfpackModel, and then operate on the specific model
+instance.
+
+Domain and response transformation associated with a model are handled
+by \ref ModelScaler instances.
+
+\todo Document service facilities for random number generation, linear
+algebra, file I/O, and shared metric computations
+
+\section DevStandAlone Standalone Surfpack
+
+Surfpack includes an interpreter so it can be used in standalone mode,
+including saving and loading model and data files.  This capability
+was functional in Version 1.0 (31 July 2006), languished through a
+series of architecture updates, but restored for Version 1.1 (31
+January 2013).
+
+
+\section DevAddtnl Additional Resources
+
+DAKOTA is currently the primary delivery vehicle for Surfpack.  The
+former Surfpack website is at http://dakota.sandia.gov/packages/surfpack.
+
+
+*/
+
+} // namespace surfpack

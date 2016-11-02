@@ -1,0 +1,17 @@
+Load[name = timing_data, file = 'krigtimes_50to3000.spd', n_predictors = 1,
+        n_responses = 2]
+CreateAxes[name = test_axes, bounds = '50 5000']
+CreateSample[name = test_timing_data, axes = test_axes, grid_points = (50)]
+CreateSurface[name = poly3, data = timing_data, response = 'median5',
+	type = polynomial, order = 3]
+Evaluate[surface = poly3, data = test_timing_data]
+Fitness[surface = poly3, data = timing_data, metric = mean_abs]
+Fitness[surface = poly3, data = timing_data, metric = press]
+Fitness[surface = poly3, data = timing_data,  metric = rsquared]
+Save[surface = poly3, file = 'cubic_poly_timing.txt']
+Save[data = test_timing_data, file = 'test_timing_data.txt']
+ 
+#mean_abs for poly3: 26.095
+#press for poly3: 38.8014
+#rsquared for poly3: 0
+

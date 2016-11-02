@@ -1,0 +1,9 @@
+LoadData[name = timing_data_3050, file = 'kriging_times_3050to5000.txt']
+Evaluate[surface = poly2, data = timing_data_3050]
+Evaluate[surface = poly3, data = timing_data_3050]
+Fitness[surface = poly2, metric = mean_abs, data = timing_data_3050]
+Fitness[surface = poly3, metric = mean_abs, data = timing_data_3050]
+
+mean_abs for poly2 on timing_data_3050: 48.9
+mean_abs for poly3 on timing_data_3050: 1.03499
+

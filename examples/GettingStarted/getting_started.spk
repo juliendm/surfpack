@@ -1,0 +1,19 @@
+Load[name = world_pop, file = 'world_pop.spd', n_predictors= 1, n_responses = 7]
+
+CreateAxes[name = years_ax, bounds = '2010 2050']
+CreateSample[name = test_years, axes = years_ax, grid_points = (9),
+  labels = (Yr)]
+
+CreateSurface[name = world_poly, data = world_pop, response = World,
+  type = polynomial, order = 2, log_scale = (World),  norm_scale = (Yr)]
+Evaluate[surface = world_poly, data = test_years, label = WorldEst]
+Fitness[surface = world_poly, data = world_pop, metric = mean_squared]
+Fitness[surface = world_poly, data = world_pop, metric = root_mean_squared]
+Fitness[surface = world_poly, data = world_pop, metric = press]
+Fitness[surface = world_poly, data = world_pop, metric = rsquared]
+Fitness[surface = world_poly, data = world_pop, metric = max_abs]
+Fitness[surface = world_poly, data = world_pop, metric = mean_abs]
+Fitness[surface = world_poly, data = world_pop, metric = mean_scaled]
+Fitness[surface = world_poly, data = world_pop, metric = max_scaled]
+Save[data = test_years, file = 'pop_est.spd']
+Save[surface = world_poly, file = 'world_poly.sps']

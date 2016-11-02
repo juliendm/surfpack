@@ -1,0 +1,2 @@
+set term png; set output "n26e171.png"
+splot [0:1] [0:1] [-3300:-2400] "n26e171dense_estimates.spd" using 1:2:4

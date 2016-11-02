@@ -1,0 +1,78 @@
+/*  _______________________________________________________________________
+ 
+    Surfpack: A Software Library of Multidimensional Surface Fitting Methods
+    Copyright (c) 2006, Sandia National Laboratories.
+    This software is distributed under the GNU Lesser General Public License.
+    For more information, see the README file in the top Surfpack directory.
+    _______________________________________________________________________ */
+
+/* parser for surfpack */
+
+%{
+#define YYINITDEPTH 400
+#define YYSTYPE double
+extern "C" int yylex();
+void yyerror(const char* s);
+
+#include "SurfpackParser.h"
+#define parser SurfpackParser::instance()
+
+%}
+
+%token STANDARD_COMMAND
+%token IDENTIFIER
+%token STRING
+%token INTEGER
+%token REAL
+%token SHELL_COMMAND
+
+%%
+
+input:		/* empty  {parser.printComms();} */
+	|	statement input
+	|	shellcommand input
+;
+
+shellcommand:	SHELL_COMMAND {parser.shellCommand();}
+;
+
+statement: 	STANDARD_COMMAND {parser.addCommandName();} arglist 
+		{parser.addArgListToCommand(), parser.storeCommandString();}
+;
+
+arglist:	'[' arg arglisttail ']'				
+;
+
+arglisttail: 	/* empty */
+	| 	',' arg arglisttail
+;
+
+arg:		IDENTIFIER {parser.addArgName();} '=' argval {parser.appendArg();}
+;
+
+argval:		IDENTIFIER 			{parser.addArg(); parser.addArgValIdent();}
+	|	INTEGER				{parser.addArg(); parser.addArgValInt();}
+	|	STRING				{parser.addArg(); parser.addArgValString();}
+	|	REAL				{parser.addArg(); parser.addArgValReal();}
+	|	tuple				{ parser.addArgValTuple();}
+	| 	{parser.pushNewArgList();} arglist {parser.addArgValArgList();}
+;
+
+tuple:		'(' {parser.newTuple();} tupleelement 
+		{parser.addTupleVal();} dimlisttail ')' 
+;
+
+tupleelement:	INTEGER
+	|	REAL
+	|	STRING
+	|	IDENTIFIER
+;
+
+dimlisttail:	/* empty */	
+	|	',' tupleelement {parser.addTupleVal();} dimlisttail
+;
+%%
+void yyerror (const char* s) /* Called by yyparse on error */
+{
+  printf("%s\n",s);
+}

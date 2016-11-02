@@ -1,0 +1,38 @@
+# Load data from files
+Load[name = too_many, file = '../perm_data/too_many.spd']
+
+# Create surfaces using existing data sets
+CreateSurface[name = poly0_too_many, data = too_many, 
+	      type = polynomial, order = 0]
+! echo order 0
+Fitness[surface = poly0_too_many, metric = max_abs]
+CreateSurface[name = poly1_too_many, data = too_many, 
+	      type = polynomial, order = 1]
+! echo order 1
+Fitness[surface = poly1_too_many, metric = max_abs]
+CreateSurface[name = poly2_too_many, data = too_many, 
+	      type = polynomial, order = 2]
+! echo order 2
+Fitness[surface = poly2_too_many, metric = max_abs]
+CreateSurface[name = poly3_too_many, data = too_many, 
+	      type = polynomial, order = 3]
+! echo order 3
+Fitness[surface = poly3_too_many, metric = max_abs]
+CreateSurface[name = mars_too_many, data = too_many, 
+	      type = mars]
+! echo mars 
+Fitness[surface = mars_too_many, metric = max_abs]
+CreateSurface[name = kriging_too_many, data = too_many, 
+	      type = kriging]
+! echo kriging
+Fitness[surface = kriging_too_many, metric = max_abs]
+CreateSurface[name = ann_too_many, data = too_many, 
+	      type = ann]
+! echo ann
+CreateSurface[name = krigingf_too_many, data = too_many, 
+	      type = kriging, thetas = (10.0)]
+! echo kriging features
+Fitness[surface = krigingf_too_many, metric = max_abs]
+#CreateSurface[name = ann_too_many, data = too_many, 
+#	      type = 'ANN', fraction_withheld = .5]
+! echo ann features

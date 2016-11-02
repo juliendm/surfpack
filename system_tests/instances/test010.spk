@@ -1,0 +1,251 @@
+CreateAxes[name = ax_001d, bounds = '-10 10']
+CreateAxes[name = ax_002d, bounds = '-10 10 | -10 10']
+CreateAxes[name = ax_003d, bounds = '0 10 | 0 10 | 0 5'] 
+CreateAxes[name = ax_005d, bounds = '-2 2 | -2 2 | -2 2 | -2 2 | -2 2']
+CreateAxes[name = ax_010d,
+  bounds = '-10 -5 | -10 -5 | -10 -5 | 3 | 4 | 5 | 2 4 | 2 4 | 0 | 0']
+! echo created axes
+
+#CreateAxes[name = ax_002d, bounds = '../axes/2d_v25_m5to10x2.axb']
+#CreateAxes[name = ax_003d, bounds = '../axes/3d_v10_0to10x2_v2_0to5.axb'] 
+#CreateAxes[name = ax_005d, bounds = '../axes/5d_v5_m2to2x5.axb']
+#CreateAxes[name = ax_010d,
+#  bounds = '../axes/10d_v5_m10tom5x3_f3_f4_f5_v5_2to4x2_f0_f0.axb']
+# Generate data from CreateAxes using test functions
+CreateSample[name = sumof_001d, axes = ax_001d, test_functions = (sumofall),
+  grid_points = (25)]
+! echo created sample 1
+CreateSample[name = sumof_002d, axes = ax_002d, test_functions = (sumofall),
+  grid_points = (25,25)]
+! echo created sample 2
+CreateSample[name = sumof_003d, axes = ax_003d, test_functions = (sumofall),
+  grid_points = (10,10,2)]
+! echo created sample 3
+CreateSample[name = sumof_005d, axes = ax_005d, test_functions = (sumofall),
+  grid_points = (5,5,5,5,5)]
+! echo created sample 5
+CreateSample[name = sumof_010d, axes = ax_010d, test_functions = (sumofall),
+  grid_points = (5,5,5,1,1,1,5,5,1,1)]
+! echo created sample 10
+
+
+#001d
+# Create surfaces using existing data sets
+CreateSurface[name = poly0_001d, data = sumof_001d, type = polynomial,
+  order = 0]
+CreateSurface[name = poly1_001d, data = sumof_001d, type = polynomial,
+  order = 1]
+CreateSurface[name = poly2_001d, data = sumof_001d, type = polynomial,
+  order = 2]
+CreateSurface[name = poly3_001d, data = sumof_001d, type = polynomial,
+  order = 3]
+CreateSurface[name = mars_001d, data = sumof_001d, type = mars]
+CreateSurface[name = kriging_001d, data = sumof_001d, type = kriging]
+CreateSurface[name = ann_001d, data = sumof_001d, type = ann]
+
+# Evaluate surfaces 
+Evaluate[surface = poly0_001d, data = sumof_001d]
+Evaluate[surface = poly1_001d, data = sumof_001d]
+Evaluate[surface = poly2_001d, data = sumof_001d]
+Evaluate[surface = poly3_001d, data = sumof_001d]
+Evaluate[surface = mars_001d, data = sumof_001d]
+Evaluate[surface = kriging_001d, data = sumof_001d]
+Evaluate[surface = ann_001d, data = sumof_001d]
+
+# Compute surface fitness metrics
+Fitness[surface = poly0_001d, data = sumof_001d, metric = mean_squared]
+Fitness[surface = poly1_001d, data = sumof_001d, metric = mean_squared]
+Fitness[surface = poly2_001d, data = sumof_001d, metric = mean_squared]
+Fitness[surface = poly3_001d, data = sumof_001d, metric = mean_squared]
+Fitness[surface = mars_001d, data = sumof_001d, metric = mean_squared]
+Fitness[surface = kriging_001d, data = sumof_001d, metric = mean_squared]
+Fitness[surface = ann_001d, data = sumof_001d, metric = mean_squared]
+
+# Save data to file
+Save[data = sumof_001d, file = '../tmp_data/sumof_001d.spd']
+
+# Save surfaces to file
+Save[surface = poly0_001d, file = '../tmp_surf/poly0_sumof_001d.sps']
+Save[surface = poly1_001d, file = '../tmp_surf/poly1_sumof_001d.sps']
+Save[surface = poly2_001d, file = '../tmp_surf/poly2_sumof_001d.sps']
+Save[surface = poly3_001d, file = '../tmp_surf/poly3_sumof_001d.sps']
+Save[surface = mars_001d, file = '../tmp_surf/mars_sumof_001d.sps']
+Save[surface = kriging_001d, file = '../tmp_surf/kriging_sumof_001d.sps']
+Save[surface = ann_001d, file = '../tmp_surf/ann_sumof_001d.sps']
+
+#002d
+# Create surfaces using existing data sets
+CreateSurface[name = poly0_002d, data = sumof_002d, type = polynomial,
+  order = 0]
+CreateSurface[name = poly1_002d, data = sumof_002d, type = polynomial,
+  order = 1]
+CreateSurface[name = poly2_002d, data = sumof_002d, type = polynomial,
+  order = 2]
+CreateSurface[name = poly3_002d, data = sumof_002d, type = polynomial,
+  order = 3]
+CreateSurface[name = mars_002d, data = sumof_002d, type = mars]
+CreateSurface[name = kriging_002d, data = sumof_002d, type = kriging]
+CreateSurface[name = ann_002d, data = sumof_002d, type = ann]
+
+# Evaluate surfaces 
+Evaluate[surface = poly0_002d, data = sumof_002d]
+Evaluate[surface = poly1_002d, data = sumof_002d]
+Evaluate[surface = poly2_002d, data = sumof_002d]
+Evaluate[surface = poly3_002d, data = sumof_002d]
+Evaluate[surface = mars_002d, data = sumof_002d]
+Evaluate[surface = kriging_002d, data = sumof_002d]
+Evaluate[surface = ann_002d, data = sumof_002d]
+
+# Compute surface fitness metrics
+Fitness[surface = poly0_002d, data = sumof_002d, metric = mean_squared]
+Fitness[surface = poly1_002d, data = sumof_002d, metric = mean_squared]
+Fitness[surface = poly2_002d, data = sumof_002d, metric = mean_squared]
+Fitness[surface = poly3_002d, data = sumof_002d, metric = mean_squared]
+Fitness[surface = mars_002d, data = sumof_002d, metric = mean_squared]
+Fitness[surface = kriging_002d, data = sumof_002d, metric = mean_squared]
+Fitness[surface = ann_002d, data = sumof_002d, metric = mean_squared]
+
+# Save data to file
+Save[data = sumof_002d, file = '../tmp_data/sumof_002d.spd']
+
+# Save surfaces to file
+Save[surface = poly0_002d, file = '../tmp_surf/poly0_sumof_002d.sps']
+Save[surface = poly1_002d, file = '../tmp_surf/poly1_sumof_002d.sps']
+Save[surface = poly2_002d, file = '../tmp_surf/poly2_sumof_002d.sps']
+Save[surface = poly3_002d, file = '../tmp_surf/poly3_sumof_002d.sps']
+Save[surface = mars_002d, file = '../tmp_surf/mars_sumof_002d.sps']
+Save[surface = kriging_002d, file = '../tmp_surf/kriging_sumof_002d.sps']
+Save[surface = ann_002d, file = '../tmp_surf/ann_sumof_002d.sps']
+
+#003d
+# Create surfaces using existing data sets
+CreateSurface[name = poly0_003d, data = sumof_003d, type = polynomial,
+  order = 0]
+CreateSurface[name = poly1_003d, data = sumof_003d, type = polynomial,
+  order = 1]
+CreateSurface[name = poly2_003d, data = sumof_003d, type = polynomial,
+  order = 2]
+CreateSurface[name = poly3_003d, data = sumof_003d, type = polynomial,
+  order = 3]
+CreateSurface[name = mars_003d, data = sumof_003d, type = mars]
+CreateSurface[name = kriging_003d, data = sumof_003d, type = kriging]
+CreateSurface[name = ann_003d, data = sumof_003d, type = ann]
+
+# Evaluate surfaces 
+Evaluate[surface = poly0_003d, data = sumof_003d]
+Evaluate[surface = poly1_003d, data = sumof_003d]
+Evaluate[surface = poly2_003d, data = sumof_003d]
+Evaluate[surface = poly3_003d, data = sumof_003d]
+Evaluate[surface = mars_003d, data = sumof_003d]
+Evaluate[surface = kriging_003d, data = sumof_003d]
+Evaluate[surface = ann_003d, data = sumof_003d]
+
+# Compute surface fitness metrics
+Fitness[surface = poly0_003d, data = sumof_003d, metric = mean_squared]
+Fitness[surface = poly1_003d, data = sumof_003d, metric = mean_squared]
+Fitness[surface = poly2_003d, data = sumof_003d, metric = mean_squared]
+Fitness[surface = poly3_003d, data = sumof_003d, metric = mean_squared]
+Fitness[surface = mars_003d, data = sumof_003d, metric = mean_squared]
+Fitness[surface = kriging_003d, data = sumof_003d, metric = mean_squared]
+Fitness[surface = ann_003d, data = sumof_003d, metric = mean_squared]
+
+# Save data to file
+Save[data = sumof_003d, file = '../tmp_data/sumof_003d.spd']
+
+# Save surfaces to file
+Save[surface = poly0_003d, file = '../tmp_surf/poly0_sumof_003d.sps']
+Save[surface = poly1_003d, file = '../tmp_surf/poly1_sumof_003d.sps']
+Save[surface = poly2_003d, file = '../tmp_surf/poly2_sumof_003d.sps']
+Save[surface = poly3_003d, file = '../tmp_surf/poly3_sumof_003d.sps']
+Save[surface = mars_003d, file = '../tmp_surf/mars_sumof_003d.sps']
+Save[surface = kriging_003d, file = '../tmp_surf/kriging_sumof_003d.sps']
+Save[surface = ann_003d, file = '../tmp_surf/ann_sumof_003d.sps']
+
+#005d
+# Create surfaces using existing data sets
+CreateSurface[name = poly0_005d, data = sumof_005d, type = polynomial,
+  order = 0]
+CreateSurface[name = poly1_005d, data = sumof_005d, type = polynomial,
+  order = 1]
+CreateSurface[name = poly2_005d, data = sumof_005d, type = polynomial,
+  order = 2]
+CreateSurface[name = poly3_005d, data = sumof_005d, type = polynomial,
+  order = 3]
+CreateSurface[name = mars_005d, data = sumof_005d, type = mars]
+CreateSurface[name = kriging_005d, data = sumof_005d, type = kriging]
+CreateSurface[name = ann_005d, data = sumof_005d, type = ann]
+
+# Evaluate surfaces 
+Evaluate[surface = poly0_005d, data = sumof_005d]
+Evaluate[surface = poly1_005d, data = sumof_005d]
+Evaluate[surface = poly2_005d, data = sumof_005d]
+Evaluate[surface = poly3_005d, data = sumof_005d]
+Evaluate[surface = mars_005d, data = sumof_005d]
+Evaluate[surface = kriging_005d, data = sumof_005d]
+Evaluate[surface = ann_005d, data = sumof_005d]
+
+# Compute surface fitness metrics
+Fitness[surface = poly0_005d, data = sumof_005d, metric = mean_squared]
+Fitness[surface = poly1_005d, data = sumof_005d, metric = mean_squared]
+Fitness[surface = poly2_005d, data = sumof_005d, metric = mean_squared]
+Fitness[surface = poly3_005d, data = sumof_005d, metric = mean_squared]
+Fitness[surface = mars_005d, data = sumof_005d, metric = mean_squared]
+Fitness[surface = kriging_005d, data = sumof_005d, metric = mean_squared]
+Fitness[surface = ann_005d, data = sumof_005d, metric = mean_squared]
+
+# Save data to file
+Save[data = sumof_005d, file = '../tmp_data/sumof_005d.spd']
+
+# Save surfaces to file
+Save[surface = poly0_005d, file = '../tmp_surf/poly0_sumof_005d.sps']
+Save[surface = poly1_005d, file = '../tmp_surf/poly1_sumof_005d.sps']
+Save[surface = poly2_005d, file = '../tmp_surf/poly2_sumof_005d.sps']
+Save[surface = poly3_005d, file = '../tmp_surf/poly3_sumof_005d.sps']
+Save[surface = mars_005d, file = '../tmp_surf/mars_sumof_005d.sps']
+Save[surface = kriging_005d, file = '../tmp_surf/kriging_sumof_005d.sps']
+Save[surface = ann_005d, file = '../tmp_surf/ann_sumof_005d.sps']
+
+#010d
+# Create surfaces using existing data sets
+CreateSurface[name = poly0_010d, data = sumof_010d, type = polynomial,
+  order = 0]
+CreateSurface[name = poly1_010d, data = sumof_010d, type = polynomial,
+  order = 1]
+CreateSurface[name = poly2_010d, data = sumof_010d, type = polynomial,
+  order = 2]
+CreateSurface[name = poly3_010d, data = sumof_010d, type = polynomial,
+  order = 3]
+CreateSurface[name = mars_010d, data = sumof_010d, type = mars]
+CreateSurface[name = kriging_010d, data = sumof_010d, type = kriging]
+CreateSurface[name = ann_010d, data = sumof_010d, type = ann]
+
+# Evaluate surfaces 
+Evaluate[surface = poly0_010d, data = sumof_010d]
+Evaluate[surface = poly1_010d, data = sumof_010d]
+Evaluate[surface = poly2_010d, data = sumof_010d]
+Evaluate[surface = poly3_010d, data = sumof_010d]
+Evaluate[surface = mars_010d, data = sumof_010d]
+Evaluate[surface = kriging_010d, data = sumof_010d]
+Evaluate[surface = ann_010d, data = sumof_010d]
+
+# Compute surface fitness metrics
+Fitness[surface = poly0_010d, data = sumof_010d, metric = mean_squared]
+Fitness[surface = poly1_010d, data = sumof_010d, metric = mean_squared]
+Fitness[surface = poly2_010d, data = sumof_010d, metric = mean_squared]
+Fitness[surface = poly3_010d, data = sumof_010d, metric = mean_squared]
+Fitness[surface = mars_010d, data = sumof_010d, metric = mean_squared]
+Fitness[surface = kriging_010d, data = sumof_010d, metric = mean_squared]
+Fitness[surface = ann_010d, data = sumof_010d, metric = mean_squared]
+
+# Save data to file
+Save[data = sumof_010d, file = '../tmp_data/sumof_010d.spd']
+
+# Save surfaces to file
+Save[surface = poly0_010d, file = '../tmp_surf/poly0_sumof_010d.sps']
+Save[surface = poly1_010d, file = '../tmp_surf/poly1_sumof_010d.sps']
+Save[surface = poly2_010d, file = '../tmp_surf/poly2_sumof_010d.sps']
+Save[surface = poly3_010d, file = '../tmp_surf/poly3_sumof_010d.sps']
+Save[surface = mars_010d, file = '../tmp_surf/mars_sumof_010d.sps']
+Save[surface = kriging_010d, file = '../tmp_surf/kriging_sumof_010d.sps']
+Save[surface = ann_010d, file = '../tmp_surf/ann_sumof_010d.sps']
+

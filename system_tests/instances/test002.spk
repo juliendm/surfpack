@@ -1,0 +1,52 @@
+# Load data from files
+
+# Load CreateAxes from files 
+CreateAxes[name = t2d_train, file = '../axes/test002_01.axb']
+CreateAxes[name = t2d_test, 
+  file = '../axes/test002_02.axb']
+
+# Generate data from CreateAxes using test functions
+CreateSample[name = multi_002_0000625_mcl, axes = t2d_train, size = 100,
+  test_functions = (rastrigin, rosenbrock, quasisine, sphere)]
+CreateSample[name = test_multi_002_0002500_mcl, axes = t2d_test, size = 100,
+  test_functions = (rastrigin, rosenbrock, quasisine, sphere)]
+
+# Load surfaces from files
+
+# Create surfaces using existing data sets
+CreateSurface[name = mars_rstgn, data = multi_002_0000625_mcl, type = mars, 
+	      response_index = 0]
+CreateSurface[name = mars_rosen, data = multi_002_0000625_mcl, type = mars, 
+	      response_index = 1]
+CreateSurface[name = mars_qsisn, data = multi_002_0000625_mcl, type = mars, 
+	      response_index = 2]
+CreateSurface[name = mars_spher, data = multi_002_0000625_mcl, type = mars, 
+	      response_index = 3]
+
+# Evaluate surfaces 
+Evaluate[surface = mars_rstgn, data = test_multi_002_0002500_mcl] 
+Evaluate[surface = mars_rosen, data = test_multi_002_0002500_mcl] 
+Evaluate[surface = mars_qsisn, data = test_multi_002_0002500_mcl] 
+Evaluate[surface = mars_spher, data = test_multi_002_0002500_mcl] 
+
+# Compute surface fitness metrics
+Fitness[surface = mars_rstgn, data = test_multi_002_0002500_mcl,
+	response_index = 0, metric = max_scaled]
+Fitness[surface = mars_rosen, data = test_multi_002_0002500_mcl,
+	response_index = 1, metric = max_scaled]
+Fitness[surface = mars_qsisn, data = test_multi_002_0002500_mcl,
+	response_index = 2, metric = max_scaled]
+Fitness[surface = mars_spher, data = test_multi_002_0002500_mcl,
+	response_index = 3, metric = max_scaled]
+# Save data to file
+Save[data = test_multi_002_0002500_mcl, 
+  file = '../tmp_data/test_multi_002_0002500_mcl.spd']
+
+# Save surfaces to file
+Save[surface = mars_rstgn, file = '../tmp_surf/test002_mars_rstgn.sps']
+Save[surface = mars_rosen, file = '../tmp_surf/test002_mars_rosen.sps']
+Save[surface = mars_qsisn, file = '../tmp_surf/test002_mars_qsisn.sps']
+Save[surface = mars_spher, file = '../tmp_surf/test002_mars_spher.sps']
+
+
+

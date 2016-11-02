@@ -1,0 +1,7 @@
+#! /bin/sh
+rm firstswig.pyc
+cp firstswig.py firstswig.py.bak
+swig -c++ -python firstswig.i
+cp firstswig.py.bak firstswig.py
+g++ -c -fpic firstswig.cxx firstswig_wrap.cxx -DHAVE_CONFIG_H -I/usr/local/include/python2.3 -I/usr/local/lib/python2.3/config
+g++ -shared firstswig.o firstswig_wrap.o -o _firstswig.so

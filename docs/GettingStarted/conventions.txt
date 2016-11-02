@@ -1,0 +1,18 @@
+# Define boundaries for a future data set.  Min/max values are separated by
+# white space; values for different dimensions are delimited by '|':
+# Then use the axes variable to create a new data set
+CreateAxes[name = boundaries_2d, bounds = '-2 2 | -2 2']
+CreateSample[name = rosenbrock_2d, axes = boundaries_2d, grid_points = (11,11),
+  labels = (x0,x1), test_functions = (rosenbrock)]
+
+# Load a data file from disk.  This data will be used later in
+# an evaluate command.
+Load[name = test_rosen, file = 'rosenbrock_2d.spd', n_predictors = 2, 
+	  n_responses = 1] 
+
+# Use the data set to create a new surface. The 'name' argument gives a name
+# for the newly create surface object.  The 'data' argument refers to a data
+# object previously created using Load or CreateSample.  Then use the newly 
+# created surface object to predict the responses for an existing data set
+CreateSurface[name = krig_rosen, data = rosenbrock_2d, type = kriging]
+Evaluate[surface = krig_rosen, data = test_rosen, label = 'krig_est']

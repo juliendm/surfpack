@@ -1,0 +1,54 @@
+# Specify the (min,max) pairs along each dimension of the data set
+CreateAxes[name = axestest007_01, file = '../axes/test007_01.axb']
+
+# Create Sample data that will be used to create Kriging approximation
+CreateSample[name = mc_sample, axes = axestest007_01, test_functions = (rosenbrock),
+  size = 100]
+Save[data = mc_sample, file = '../tmp_data/rosen5d.spd']
+
+# Create the surface
+CreateSurface[name = rosenkrig, data = mc_sample, type = kriging, 
+  correlations = (1.0,2.0,3.0,4.0,5.0)]
+
+# Create two sets of test data...
+# ... one with 32 points
+CreateSample[name = test32, axes = axestest007_01, test_functions = (rosenbrock),
+  grid_points = (2,2,2,2,2)]
+Save[data = test32, file = '../tmp_data/test32_rosen.spd']
+
+# ... and another with 243 points
+CreateAxes[name = axestest007_02, file = '../axes/test007_02.axb']
+CreateSample[name = test243, axes = axestest007_02, test_functions = (rosenbrock),
+  grid_points = (3,3,3,3,3)]
+Save[data = test243, file = '../tmp_data/test243_rosen.spd']
+
+#Evaluate fitness of kriging approximation using several metrics
+Fitness[surface = rosenkrig, data = test32, metric = min_abs]
+Fitness[surface = rosenkrig, data = test32, metric = max_abs]
+Fitness[surface = rosenkrig, data = test32, metric = sum_abs]
+Fitness[surface = rosenkrig, data = test32, metric = mean_abs]
+Fitness[surface = rosenkrig, data = test32, metric = min_scaled]
+Fitness[surface = rosenkrig, data = test32, metric = max_scaled]
+Fitness[surface = rosenkrig, data = test32, metric = sum_scaled]
+Fitness[surface = rosenkrig, data = test32, metric = mean_scaled]
+Fitness[surface = rosenkrig, data = test32, metric = min_squared]
+Fitness[surface = rosenkrig, data = test32, metric = max_squared]
+Fitness[surface = rosenkrig, data = test32, metric = sum_squared]
+Fitness[surface = rosenkrig, data = test32, metric = mean_squared]
+Fitness[surface = rosenkrig, data = test32, metric = max_relative]
+Fitness[surface = rosenkrig, data = test32, metric = mean_relative]
+
+Fitness[surface = rosenkrig, data = test243, metric = min_abs]
+Fitness[surface = rosenkrig, data = test243, metric = max_abs]
+Fitness[surface = rosenkrig, data = test243, metric = sum_abs]
+Fitness[surface = rosenkrig, data = test243, metric = mean_abs]
+Fitness[surface = rosenkrig, data = test243, metric = min_scaled]
+Fitness[surface = rosenkrig, data = test243, metric = max_scaled]
+Fitness[surface = rosenkrig, data = test243, metric = sum_scaled]
+Fitness[surface = rosenkrig, data = test243, metric = mean_scaled]
+Fitness[surface = rosenkrig, data = test243, metric = min_squared]
+Fitness[surface = rosenkrig, data = test243, metric = max_squared]
+Fitness[surface = rosenkrig, data = test243, metric = sum_squared]
+Fitness[surface = rosenkrig, data = test243, metric = mean_squared]
+Fitness[surface = rosenkrig, data = test243, metric = max_relative]
+Fitness[surface = rosenkrig, data = test243, metric = mean_relative]

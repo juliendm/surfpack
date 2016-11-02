@@ -1,0 +1,34 @@
+#Data courtesty of NASA
+#Downloaded from http://pds-geosciences.wustl.edu/missions/mgs/megdr.html
+#Accessed June 2006
+Load[name = topo, file = 'n26e171.spd', n_predictors = 2, n_responses = 1]
+Load[name = dense_topo, file = 'n26e171dense.spd', n_predictors = 2, n_responses = 1]
+! echo data loaded
+CreateSurface[name = topo_kriging, data = topo, type = kriging, correlations = (1.e3,1.e3)]
+! echo created kriging
+CreateSurface[name = topo_mars, data = topo, type = mars]
+! echo created mars 
+Evaluate[surface = topo_kriging, data = dense_topo, response = 'kriging_est']
+! echo evaluated kriging
+Evaluate[surface = topo_mars, data = dense_topo, response = 'mars_est']
+! echo evaluated mars
+Save[data = dense_topo, file = 'n26e171dense_estimates.spd']
+! echo saved
+Fitness[surface = topo_kriging, data = topo, metric = mean_scaled]
+Fitness[surface = topo_mars, data = topo, metric = mean_scaled]
+! echo fitness mean scaled
+Fitness[surface = topo_kriging, data = topo, metric = max_scaled]
+Fitness[surface = topo_mars, data = topo, metric = max_scaled]
+! echo fitness max scaled
+Fitness[surface = topo_kriging, data = topo, metric = rsquared]
+Fitness[surface = topo_mars, data = topo, metric = rsquared]
+! echo fitness rsquared 
+Fitness[surface = topo_kriging, metric = mean_scaled, data = dense_topo]
+Fitness[surface = topo_mars, metric = mean_scaled, data = dense_topo]
+! echo fitness mean scaled
+Fitness[surface = topo_kriging, metric = max_scaled, data = dense_topo]
+Fitness[surface = topo_mars, metric = max_scaled, data = dense_topo]
+! echo fitness max scaled
+Fitness[surface = topo_kriging, metric = rsquared, data = dense_topo]
+Fitness[surface = topo_mars, metric = rsquared, data = dense_topo]
+! echo fitness rsquared 

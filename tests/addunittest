@@ -1,0 +1,21 @@
+#!/bin/sh
+# $1 = name of test files (there should be a $1.h and $1.cpp)
+FILENAME="$1"
+shift
+# $@ = list of command line arguments 
+for TESTNAME in $@; do
+  sed -i "
+  /CPPUNIT_TEST_SUITE_END/ i\
+    CPPUNIT_TEST( $TESTNAME );
+  /};/ i\
+    void $TESTNAME();
+  " $FILENAME.h
+  echo "void $FILENAME::$TESTNAME()" >> $FILENAME.cpp
+  sed -i '
+  $ a\
+{\
+\
+}\
+
+' $FILENAME.cpp
+done

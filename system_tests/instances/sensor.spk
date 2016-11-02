@@ -1,0 +1,61 @@
+# Load data from files
+Load[name = sensor_data, file = '../perm_data/sensor_1d.spd', n_predictors = 1,
+  n_responses = 1]
+
+# Create a test data set
+CreateAxes[name = ax_test, bounds = '0 3']
+CreateSample[name = sensor_test, axes = ax_test, grid_points = (50)]
+
+# Create surfaces using existing data sets
+CreateSurface[name = poly0_sensor, data = sensor_data, type = polynomial,
+ 	      order = 0]
+CreateSurface[name = poly1_sensor, data = sensor_data, type = polynomial,
+ 	      order = 1]
+CreateSurface[name = poly2_sensor, data = sensor_data, type = polynomial,
+ 	      order = 2]
+CreateSurface[name = poly3_sensor, data = sensor_data, type = polynomial,
+ 	      order = 3]
+CreateSurface[name = krig_sensor, data = sensor_data, type = kriging]
+CreateSurface[name = mars_sensor, data = sensor_data, type = mars]
+CreateSurface[name = ann_sensor, data = sensor_data, type = ann]
+
+# Evaluate surfaces 
+Evaluate[surface = poly0_sensor, data = sensor_test]
+Evaluate[surface = poly1_sensor, data = sensor_test]
+Evaluate[surface = poly2_sensor, data = sensor_test]
+Evaluate[surface = poly3_sensor, data = sensor_test]
+Evaluate[surface = krig_sensor, data = sensor_test]
+Evaluate[surface = mars_sensor, data = sensor_test]
+Evaluate[surface = ann_sensor, data = sensor_test]
+
+# Compute surface fitness metrics
+Fitness[surface = poly0_sensor, metric = press]
+Fitness[surface = poly1_sensor, metric = press]
+Fitness[surface = poly2_sensor, metric = press]
+Fitness[surface = poly3_sensor, metric = press]
+Fitness[surface = krig_sensor, metric = press]
+Fitness[surface = mars_sensor, metric = press]
+Fitness[surface = ann_sensor, metric = press]
+
+# Save data to file
+Save[data = sensor_test, file = '../tmp_data/sensor_test.spd']
+
+# Save surfaces to file
+Save[surface = poly0_sensor, file = '../tmp_surf/poly0_sensor.sps']
+Save[surface = poly1_sensor, file = '../tmp_surf/poly1_sensor.sps']
+Save[surface = poly2_sensor, file = '../tmp_surf/poly2_sensor.sps']
+Save[surface = poly3_sensor, file = '../tmp_surf/poly3_sensor.sps']
+Save[surface = krig_sensor, file = '../tmp_surf/krig_sensor.sps']
+Save[surface = mars_sensor, file = '../tmp_surf/mars_sensor.sps']
+Save[surface = ann_sensor, file = '../tmp_surf/ann_sensor.sps']
+
+/*
+pushd ../tmp_data
+rm gnuplot_script 2> /dev/null 2
+echo "set term png; set output \"sensor.png\";" > gnuplot_script
+echo plot [100:2400] [200:1000] \"../tmp_data/sensor_test.spd\" using 1:2 >> gnuplot_script
+gnuplot gnuplot_script
+popd
+*/
+
+

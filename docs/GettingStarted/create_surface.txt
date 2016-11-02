@@ -1,0 +1,2 @@
+CreateSurface[name = world_poly, data = world_pop, response = World,
+  type = polynomial, order = 2, log_scale = (World),  norm_scale = (Yr)]
