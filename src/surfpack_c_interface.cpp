@@ -175,7 +175,17 @@ double surfpack_eval_model(const char * const name, const double * const eval_pt
 }
 
 extern "C"
-double surfpack_variance_model(const char * const name, const double * const eval_pt, unsigned int num_vars)
+void surfpack_gradient_model(const char * const name, const double * const eval_pt, double * grad_output, unsigned int num_vars)
+{
+  std::vector<double> eval_vec(eval_pt, eval_pt + num_vars);
+  SurfpackModel* model = modelVars[std::string(name)];
+  VecDbl grad = model->gradient(eval_vec);
+  for (unsigned int i=0; i<num_vars; ++i)
+    grad_output[i] = grad[i];
+}
+
+extern "C"
+double surfpack_variance_model(const char * const name, const double * const eval_pt,  unsigned int num_vars)
 {
   std::vector<double> eval_vec(eval_pt, eval_pt + num_vars);
   SurfpackModel* model = modelVars[std::string(name)];

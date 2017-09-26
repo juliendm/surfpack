@@ -66,6 +66,13 @@ double surfpack_eval_model(const char * const name, const double * const eval_pt
 #ifdef __cplusplus
 extern "C"
 #endif
+void surfpack_gradient_model(const char * const name, const double * const eval_pt, double * grad_output, unsigned int num_vars);
+
+/* Evaluate the loaded model at the provided eval_pt, with length
+   num_vars.  Returns the surrogatem model value at eval_pt. */
+#ifdef __cplusplus
+extern "C"
+#endif
 double surfpack_variance_model(const char * const name, const double * const eval_pt, unsigned int num_vars);
 
 /* Free the surfpack model from memory. */
